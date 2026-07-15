@@ -2,10 +2,12 @@ from archivo import cargar_productos, guardar_productos
 from inventario import *
 from utils import validar_entero, validar_float
 from logs import configurar_logger
+from colorama import Fore, Style, init
 
+init(autoreset=True)
 
 def mostrar_menu():
-    print("\n===== SISTEMA DE INVENTARIO =====")
+    print(Fore.CYAN + "\n===== SISTEMA DE INVENTARIO =====")
     print("1. Agregar producto")
     print("2. Listar productos")
     print("3. Actualizar stock")
@@ -48,14 +50,14 @@ def main():
 
             elif opcion == "0":
                 guardar_productos(productos)
-                print("Saliendo...")
+                print(Fore.CYAN + "Saliendo...")
                 break
 
             else:
-                print("Opción inválida.")
+                print(Fore.RED + "Opción inválida.")
 
         except ValueError as e:
-            print(f"Error: {e}")
+            print(Fore.RED + f"Error: {e}")
 
 
 if __name__ == "__main__":
