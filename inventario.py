@@ -1,6 +1,9 @@
 from utils import generar_id
 from logs import registrar_log
 from tabulate import tabulate
+from colorama import Fore, Style, init
+
+init(autoreset=True)
 
 
 def agregar_producto(productos, nombre, cantidad, precio):
@@ -15,7 +18,7 @@ def agregar_producto(productos, nombre, cantidad, precio):
     }
 
     productos.append(producto)
-    registrar_log(f"Producto agregado: {nombre}")
+    registrar_log(Fore.GREEN + f"Producto agregado: {nombre}")
 
 
 def listar_productos(productos):
@@ -23,7 +26,7 @@ def listar_productos(productos):
     Lista todos los productos en formato tabla.
     """
     if not productos:
-        print("No hay productos.")
+        print(Fore.RED + "No hay productos.")
         return
 
     tabla = [[p["id"], p["nombre"], p["cantidad"], p["precio"]] for p in productos]
@@ -51,10 +54,10 @@ def eliminar_producto(productos, id_producto):
         if p["id"] == id_producto:
             productos.remove(p)
             registrar_log(f"Producto eliminado: {p['nombre']}")
+            print(Fore.GREEN + f"Producto '{p['nombre']}' eliminado correctamente.")
             return
 
-    print("Producto no encontrado.")
-
+    print(Fore.RED + "Producto no encontrado.")
 
 def buscar_producto(productos, nombre):
     """
